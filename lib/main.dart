@@ -94,6 +94,30 @@ class BasicPage extends StatelessWidget {
           thickness: 2,
         ),
         sectionTitleText("Mes Postes"),
+        post(
+            time: "5 minutes",
+            image: "images/carnaval.jpg",
+            desc:
+                "Petit tour au magic World, on s'est bien amusés et en plus il n'y avait pas grand monde. Bref, le kiff !"),
+        post(
+            time: "2 jours",
+            image: "images/mountain.jpg",
+            desc: "La montagne ça vous gagne.",
+            likes: 38),
+        post(
+          time: " 1 semaine",
+          image: "images/work.jpg",
+          desc: "Retour au boulot après plusieurs mois de confinement.",
+          likes: 12,
+          comments: 3,
+        ),
+        post(
+            time: "5 ans",
+            image: "images/playa.jpg",
+            desc:
+                "Le boulot en remote c'est le pied: la preuve ceci sera mon bureau pour les prochaines semaines !",
+            likes: 235,
+            comments: 88),
       ])),
     );
   }
@@ -180,6 +204,59 @@ class BasicPage extends StatelessWidget {
       children: children,
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    );
+  }
+
+  Container post(
+      {required String time,
+      required String image,
+      required String desc,
+      int likes = 0,
+      int comments = 0}) {
+    return Container(
+        margin: const EdgeInsets.only(top: 8, left: 3, right: 3),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromRGBO(225, 225, 225, 1)),
+        child: Column(children: [
+          Row(
+            children: [
+              myProfilePic(20),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+              ),
+              Text("Mohamed SANGARE"),
+              Spacer(),
+              timeText(time),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 8, bottom: 8),
+            child: Image.asset(image, fit: BoxFit.cover),
+          ),
+          Text(
+            desc,
+            style: const TextStyle(color: Colors.blueAccent),
+            textAlign: TextAlign.center,
+          ),
+          const Divider(),
+          Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.favorite),
+                Text("$likes Likes"),
+                Icon(Icons.comment),
+                Text("$comments Commentaires"),
+              ])
+        ]));
+  }
+
+  Text timeText(String time) {
+    return Text(
+      "Il y a $time",
+      style: const TextStyle(color: Colors.blue),
     );
   }
 }
